@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        #qrForm {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        #qrForm input[type="text"] {
+            width: 300px;
+            padding: 15px;
+            font-size: 24px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #qrForm input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        #qrForm button {
+            padding: 15px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #qrForm button:hover {
+            background-color: #0056b3;
+        }
+
+        #printBtn {
+            padding: 15px 25px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 20px;
+            display: block;
+            width: 200px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.3s;
+        }
+
+        #printBtn:hover {
+            background-color: #218838;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 15px; 
+            justify-content: center;
+            padding: 5px; 
+            margin: 0 auto; 
+        }
+
+        .grid-item {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.1s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: 90px;
+            min-height: 110px; 
+        }
+
+        .grid-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .grid-item img {
+            width: 80px; 
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .qr-code {
+            margin-bottom: 5px;
+        }
+
+        .qr-label {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        button {
+            font-size: 16px;
+            color: #ddd;
+            background-color: #007bff;
+            padding: 10px 25px;
+            border-radius: 6px;
+            margin-left: 20px;
+            border: 1px solid #ddd;
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 600px) {
+            #qrForm {
+                flex-direction: column;
+            }
+            
+            #qrForm input[type="text"] {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            #qrForm button {
+                width: 100%;
+            }
+
+            #printBtn {
+                width: 100%;
+            }
+
+           
+        }
+    </style>
+</head>
+<body>
+    <h2>Generate QR Code</h2>
+
+    <button onclick="location.href='index.php'">Back to home</button>
+    <form id="qrForm">
+
+        <input type="text" id="code" placeholder="Enter your code" required>
+        <button type="submit">Generate QR Code</button>
+        <button id="printBtn" onclick="window.print()">Print or save Pdf</button>
+    </form>
+
+    <!-- Grid untuk QR Code -->
+    <div class="grid-container" id="qrGrid">
+        <div class="grid-item"><div class="qr-code" id="grid1"></div><div class="qr-label" id="label1"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid2"></div><div class="qr-label" id="label2"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid3"></div><div class="qr-label" id="label3"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid4"></div><div class="qr-label" id="label4"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid5"></div><div class="qr-label" id="label5"></div></div>
+
+        <div class="grid-item"><div class="qr-code" id="grid6"></div><div class="qr-label" id="label6"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid7"></div><div class="qr-label" id="label7"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid8"></div><div class="qr-label" id="label8"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid9"></div><div class="qr-label" id="label9"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid10"></div><div class="qr-label" id="label10"></div></div>
+
+        <div class="grid-item"><div class="qr-code" id="grid11"></div><div class="qr-label" id="label11"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid12"></div><div class="qr-label" id="label12"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid13"></div><div class="qr-label" id="label13"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid14"></div><div class="qr-label" id="label14"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid15"></div><div class="qr-label" id="label15"></div></div>
+
+        <div class="grid-item"><div class="qr-code" id="grid16"></div><div class="qr-label" id="label16"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid17"></div><div class="qr-label" id="label17"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid18"></div><div class="qr-label" id="label18"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid19"></div><div class="qr-label" id="label19"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid20"></div><div class="qr-label" id="label20"></div></div>
+
+        <div class="grid-item"><div class="qr-code" id="grid21"></div><div class="qr-label" id="label21"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid22"></div><div class="qr-label" id="label22"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid23"></div><div class="qr-label" id="label23"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid24"></div><div class="qr-label" id="label24"></div></div>
+        <div class="grid-item"><div class="qr-code" id="grid25"></div><div class="qr-label" id="label25"></div></div>
+       
+    </div>
+
+ 
+   
+
+    <script>
+        let qrCounter = 1;
+
+        document.getElementById('qrForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission and page reload
+
+            const code = document.getElementById('code').value; // Get the input value
+            const gridItem = document.getElementById('grid' + qrCounter); // Get the current grid
+            const qrLabel = gridItem.nextElementSibling; // Get the label element under the QR code
+
+            // Ensure we don't exceed 5 QR codes
+            if (qrCounter > 25) {
+                alert("The grid is full. Please refresh the page to generate more QR codes.");
+                return;
+            }
+
+            // Generate the QR code using an API
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(code)}`;
+            gridItem.innerHTML = `<img src="${qrCodeUrl}" alt="QR Code for ${code}">`;
+
+            // Set the label below the QR code
+            qrLabel.innerHTML = code;
+
+         
+
+            qrCounter++;
+        });
+    </script>
+
+</body>
+</html>

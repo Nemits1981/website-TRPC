@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Kertas - Card 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .countbox2 {
+      background-color: #28a745;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      width: 100%;
+      font-size: 18px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-top: 0px;
+    }
+
+    .card2 {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      width: 100%;
+      margin-top: 0px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 90%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-group button {
+      width: 80%;
+      padding: 10px;
+      background-color:#007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .form-group button:hover {
+      background-color: #218838;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="countbox2" id="countbox2">
+      Hasil akan ditampilkan di sini
+    </div>
+    <div class="card2">
+      <h2>Pembagian Lebar booklet dari lebar Kertas jumbo roll</h2>
+      <div class="form-group">
+        <label for="lebarTotal2">Lebar kertas jumboroll (mm):</label>
+        <input type="number" id="lebarTotal2" placeholder="455" required>
+      </div>
+      <div class="form-group">
+        <label for="lebarKertas2">Lebar booklet (mm):</label>
+        <input type="number" id="lebarKertas2" placeholder="44" required>
+      </div>
+      <div class="form-group">
+        <button onclick="hitungPembagian()">Hitung</button>
+      </div>
+      <div class="form-group">
+        <button onclick="location.href='index.php'">Back to home</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function hitungPembagian() {
+      const lebarTotal = parseFloat(document.getElementById('lebarTotal2').value);
+      const lebarKertas = parseFloat(document.getElementById('lebarKertas2').value);
+
+      if (isNaN(lebarTotal) || isNaN(lebarKertas)) {
+        alert("Harap isi semua field input.");
+        return;
+      }
+
+      // Menghitung jumlah booklet dan sisa
+      const jumlahPerBaris = Math.floor(lebarTotal / lebarKertas); // Jumlah booklet yang dapat dibuat
+      const sisa = lebarTotal % lebarKertas; // Lebar sisa setelah pembagian
+
+      // Menampilkan hasil di countbox2 saja
+      document.getElementById('countbox2').innerText = `Jumlah booklet: ${jumlahPerBaris} pcs, Sisa: ${sisa.toFixed(2)} mm`;
+    }
+  </script>
+
+</body>
+</html>

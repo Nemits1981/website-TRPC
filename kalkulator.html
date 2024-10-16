@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operasi Matematika dengan CSS Card</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        h2 {
+            font-size: 36px;
+            text-align: center;
+            color: black;
+        }
+        .card {
+            width: 400px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between; 
+            flex-wrap: wrap; 
+        }
+
+        button {
+            flex-basis: 48%;
+            padding: 5px;
+            margin: 5px 0;
+            border: none;
+            color: white;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-tambah {
+             background-color: #4CAF50; 
+             font-size: 46px;
+            } 
+        .btn-kurang {
+             background-color: #f44336;
+             font-size: 46px;
+             } 
+        .btn-kali { 
+            background-color: #2196F3; 
+            font-size: 36px;
+        } 
+        .btn-bagi { 
+            background-color: #FF9800; 
+            font-size: 46px;
+        } 
+        button { 
+            background-color: #5700ae;
+            font-size: 16px;             
+        } 
+         
+        button:hover {
+            opacity: 0.9; 
+        }
+
+        .hasil-input {
+            width: 100%;
+            padding: 20px;
+            margin: 5px 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: center; 
+            font-size: 24px; 
+        }
+        .angka-input {
+            width: 100%;
+            padding: 20px;
+            margin: 5px 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: center; 
+            font-size: 26px; 
+        }
+
+        label {
+            font-weight: bold;
+            display: block; 
+            text-align: center; 
+            margin-bottom: 5px; 
+        }
+    </style>
+
+    <script>
+        function hitungOperasi(operasi) {
+            let angka1 = parseFloat(document.getElementById("angka1").value.replace(',', '.'));
+            let angka2 = parseFloat(document.getElementById("angka2").value.replace(',', '.'));
+            let hasil = 0;
+
+            // Validasi input
+            if (isNaN(angka1) || isNaN(angka2)) {
+                alert("Harap masukkan angka yang valid.");
+                return;
+            }
+
+            if (operasi === 'tambah') {
+                hasil = angka1 + angka2;
+            } else if (operasi === 'kurang') {
+                hasil = angka1 - angka2;
+            } else if (operasi === 'kali') {
+                hasil = angka1 * angka2;
+            } else if (operasi === 'bagi') {
+                if (angka2 === 0) {
+                    alert("Pembagian dengan nol tidak diperbolehkan.");
+                    return;
+                }
+                hasil = angka1 / angka2;
+            }
+
+            hasil = Math.round(hasil);
+
+            document.getElementById("hasil").value = hasil; 
+        }
+    </script>
+</head>
+<body>
+
+    <div class="card">
+       
+        <button onclick="location.href='index.php'">Back to home</button>
+        <h2>Kalkulator</h2>
+        <label for="hasil"></label>
+        <input type="text" id="hasil" class="hasil-input" placeholder="Hasil : 000000" readonly><br>
+
+        <label for="angka1"></label>
+        <input type="text" id="angka1" class="angka-input" placeholder="000000"><br>
+
+        <label for="angka2"></label>
+        <input type="text" id="angka2" class="angka-input" placeholder="000000"><br>
+          
+        <!-- Container untuk tombol dengan Flexbox -->
+        <div class="button-container">
+            <button class="btn-tambah" onclick="hitungOperasi('tambah')">+</button>
+            <button class="btn-kurang" onclick="hitungOperasi('kurang')">-</button>
+            <button class="btn-kali" onclick="hitungOperasi('kali')">x</button>
+            <button class="btn-bagi" onclick="hitungOperasi('bagi')">:</button>
+        </div>
+    </div>
+
+</body>
+</html>

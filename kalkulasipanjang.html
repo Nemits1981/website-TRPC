@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Length Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full height of viewport */
+            padding: 20px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Default to full width */
+            max-width: 600px; /* Limit maximum width */
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+            height: auto; /* Auto height to fit content */
+        }
+
+        /* Customizable width and height */
+        .card.custom {
+            width: 400px; /* Example width */
+            height: 500px; /* Example height */
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            text-align: left;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        input {
+            font-size: 16px;
+            padding: 10px;
+            margin: 5px 0 15px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 80%;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        span#result {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        /* Optional responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%; /* Make sure card takes full width on small screens */
+                height: auto; /* Ensure height auto-adjusts for content */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card custom">
+    <div> <button onclick="location.href='index.php'">Back to home</button></div>
+    <h2>kalkulasi panjang kertas</h2>
+    <h3>Panjang kertas: <span id="result">0</span> meter</h3>
+    <label for="weight"></label>
+    <input type="number" id="weight" placeholder="masukkan berat  (gram)" step="0.01" min="0">
+
+    <label for="width"></label>
+    <input type="number" id="width" placeholder="masukkan lebar kertas (mm)" step="0.01" min="0">
+
+    <label for="gsm"></label>
+    <input type="number" id="gsm" placeholder="masukkan gsm " step="0.01" min="0">
+
+   <div><button onclick="calculateLength()">kalkulasi panjang kertas</button></div>
+
+   <!-- Tombol Refresh -->
+   <div><button onclick="refreshForm()">Refresh Form</button></div>
+</div>
+
+<script>
+    function calculateLength() {
+        // Ambil nilai dari input dan lakukan validasi
+        const weight = parseFloat(document.getElementById('weight').value);
+        const width_mm = parseFloat(document.getElementById('width').value); // Lebar dalam mm
+        const gsm = parseFloat(document.getElementById('gsm').value);
+
+        // Konversi lebar dari mm ke meter
+        const width_m = width_mm / 1000;
+
+        // Validasi input
+        if (isNaN(weight) || isNaN(width_m) || isNaN(gsm) || weight <= 0 || width_m <= 0 || gsm <= 0) {
+            alert("Please enter valid positive values for weight, width (in mm), and GSM.");
+            return;
+        }
+
+        // Hitung panjang kertas menggunakan rumus yang benar
+        const length = weight / (width_m * gsm);
+
+        // Tampilkan hasil dengan validasi jika tidak valid
+        if (!isFinite(length) || length <= 0) {
+            alert("The result is not valid. Please check the values entered.");
+            document.getElementById('result').textContent = "0";
+        } else {
+            document.getElementById('result').textContent = length.toFixed(2); // Hasil dengan 2 desimal
+        }
+    }
+
+    // Fungsi untuk merefresh form
+    function refreshForm() {
+        // Reset semua input ke nilai awal (kosong)
+        document.getElementById('weight').value = '';
+        document.getElementById('width').value = '';
+        document.getElementById('gsm').value = '';
+
+        // Reset hasil kalkulasi
+        document.getElementById('result').textContent = "0";
+    }
+</script>
+
+</body>
+</html>
